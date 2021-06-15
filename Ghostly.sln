@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31321.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ghostly.Common", "Ghostly.Common\Ghostly.Common.csproj", "{F22C420E-D504-4501-A460-75D2A0B665DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ghostly.Web", "Ghostly.Web\Ghostly.Web.csproj", "{2FD7EBC2-419F-4B8D-8397-BC621C751B41}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F22C420E-D504-4501-A460-75D2A0B665DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F22C420E-D504-4501-A460-75D2A0B665DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F22C420E-D504-4501-A460-75D2A0B665DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F22C420E-D504-4501-A460-75D2A0B665DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FD7EBC2-419F-4B8D-8397-BC621C751B41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FD7EBC2-419F-4B8D-8397-BC621C751B41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FD7EBC2-419F-4B8D-8397-BC621C751B41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FD7EBC2-419F-4B8D-8397-BC621C751B41}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3EEA97F9-B607-4CD6-A51B-8BD9B09604E8}
+	EndGlobalSection
+EndGlobal
