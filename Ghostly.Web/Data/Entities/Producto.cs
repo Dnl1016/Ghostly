@@ -19,11 +19,6 @@ namespace Ghostly.Web.Data.Entities
         [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = false)]
         public decimal Precio { get; set; }
 
-        [Display(Name = "Fecha de creacion")]
-        [Required(ErrorMessage = "El Campo {0} es obligatorio.")]
-        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
-        public DateTime FechaCreacion { get; set; }
-
 
 
         [Display(Name = "Cantidad del producto")]
