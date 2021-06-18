@@ -1,7 +1,9 @@
-﻿using Ghostly.Web.Data;
-using Microsoft.AspNetCore;
+﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Ghostly.Web.Data;
+using Ghostly.Web;
+
 namespace Ghostly.Web
 {
     public class Program

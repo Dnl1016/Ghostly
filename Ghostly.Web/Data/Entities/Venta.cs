@@ -33,6 +33,6 @@ namespace Ghostly.Web.Data.Entities
         public Producto Productos { get; set; }
         public Cliente Clientes { get; set; }
 
-        public User User { get; set; }
+       
     }
 }

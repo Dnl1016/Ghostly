@@ -53,8 +53,6 @@ namespace Ghostly.Web.Data.Entities
 
         public TipoProducto TipoProducto { get; set; }
 
-        public User User { get; set; }
-
         public ICollection<ImageProducto> ImageProductos { get; set; }
         
         public ICollection<Venta> Ventas  { get; set; }

@@ -10,22 +10,22 @@ using Ghostly.Web.Data.Entities;
 
 namespace Ghostly.Web.Controllers
 {
-    public class UsersController : Controller
+    public class ClientesController : Controller
     {
         private readonly DataContext _context;
 
-        public UsersController(DataContext context)
+        public ClientesController(DataContext context)
         {
             _context = context;
         }
 
-        // GET: Users
+        // GET: Clientes
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Users.ToListAsync());
+            return View(await _context.Clientes.ToListAsync());
         }
 
-        // GET: Users/Details/5
+        // GET: Clientes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace Ghostly.Web.Controllers
                 return NotFound();
             }
 
-            var user = await _context.Users
+            var cliente = await _context.Clientes
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (user == null)
+            if (cliente == null)
             {
                 return NotFound();
             }
 
-            return View(user);
+            return View(cliente);
         }
 
-        // GET: Users/Create
+        // GET: Clientes/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Users/Create
+        // POST: Clientes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Document,FirstName,LastName,Cellphone,Address")] User user)
+        public async Task<IActionResult> Create([Bind("Id")] Cliente cliente)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(user);
+                _context.Add(cliente);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(user);
+            return View(cliente);
         }
 
-        // GET: Users/Edit/5
+        // GET: Clientes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace Ghostly.Web.Controllers
                 return NotFound();
             }
 
-            var user = await _context.Users.FindAsync(id);
-            if (user == null)
+            var cliente = await _context.Clientes.FindAsync(id);
+            if (cliente == null)
             {
                 return NotFound();
             }
-            return View(user);
+            return View(cliente);
         }
 
-        // POST: Users/Edit/5
+        // POST: Clientes/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Document,FirstName,LastName,Cellphone,Address")] User user)
+        public async Task<IActionResult> Edit(int id, [Bind("Id")] Cliente cliente)
         {
-            if (id != user.Id)
+            if (id != cliente.Id)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace Ghostly.Web.Controllers
             {
                 try
                 {
-                    _context.Update(user);
+                    _context.Update(cliente);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!UserExists(user.Id))
+                    if (!ClienteExists(cliente.Id))
                     {
                         return NotFound();
                     }
@@ -113,10 +113,10 @@ namespace Ghostly.Web.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(user);
+            return View(cliente);
         }
 
-        // GET: Users/Delete/5
+        // GET: Clientes/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +124,30 @@ namespace Ghostly.Web.Controllers
                 return NotFound();
             }
 
-            var user = await _context.Users
+            var cliente = await _context.Clientes
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (user == null)
+            if (cliente == null)
             {
                 return NotFound();
             }
 
-            return View(user);
+            return View(cliente);
         }
 
-        // POST: Users/Delete/5
+        // POST: Clientes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var user = await _context.Users.FindAsync(id);
-            _context.Users.Remove(user);
+            var cliente = await _context.Clientes.FindAsync(id);
+            _context.Clientes.Remove(cliente);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool UserExists(int id)
+        private bool ClienteExists(int id)
         {
-            return _context.Users.Any(e => e.Id == id);
+            return _context.Clientes.Any(e => e.Id == id);
         }
     }
 }
