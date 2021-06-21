@@ -1,4 +1,5 @@
 ﻿using Ghostly.Web.Data.Entities;
+using Ghostly.Web.Models;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,10 @@ namespace Ghostly.Web.Helpers
         Task AddUserToRoleAsync(Usuario usuario, string roleName);
 
         Task<bool> IsUserInRoleAsync(Usuario usuario, string roleName);
-        
+        Task<SignInResult> LoginAsync(LoginViewModel model);
+
+        Task LogoutAsync();
+
 
     }
 }

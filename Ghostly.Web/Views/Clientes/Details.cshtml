@@ -4,15 +4,52 @@
     ViewData["Title"] = "Details";
 }
 
-<h2>Details</h2>
+<h2>Clientes</h2>
 
 <div>
-    <h4>Cliente</h4>
+    <h4>Detalles</h4>
     <hr />
     <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Usuario.Document)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Usuario.Document)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Usuario.FirstName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Usuario.FirstName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Usuario.LastName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Usuario.LastName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Usuario.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Usuario.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Usuario.PhoneNumber)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Usuario.PhoneNumber)
+        </dd>
+        <dt>
+            Ventas
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Ventas.Count)
+        </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Editar</a>
+    <a asp-action="Index" class="btn btn-success">Volver a lista</a>
 </div>
+

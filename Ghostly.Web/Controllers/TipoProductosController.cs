@@ -7,30 +7,25 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Ghostly.Web.Data;
 using Ghostly.Web.Data.Entities;
-using Microsoft.AspNetCore.Authorization;
 
 namespace Ghostly.Web.Controllers
 {
-    [Authorize (Roles="Administrador") ]
-    public class ClientesController : Controller
+    public class TipoProductosController : Controller
     {
-        private readonly DataContext _datacontext;
+        private readonly DataContext _context;
 
-        public ClientesController(DataContext dataContext)
+        public TipoProductosController(DataContext context)
         {
-            _datacontext = dataContext;
+            _context = context;
         }
 
-        // GET: Clientes
-        public IActionResult Index()
+        // GET: TipoProductos
+        public async Task<IActionResult> Index()
         {
-            return View(_datacontext.Clientes
-                .Include(c=>c.Usuario)
-                .Include(c =>c.Ventas)
-                );
+            return View(await _context.TipoProductos.ToListAsync());
         }
 
-        // GET: Clientes/Details/5
+        // GET: TipoProductos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -38,45 +33,39 @@ namespace Ghostly.Web.Controllers
                 return NotFound();
             }
 
-            var cliente = await _datacontext.Clientes
-                .Include(c=>c.Usuario)
-                .Include(c => c.Ventas)
-                .ThenInclude(c => c.Productos)
-                .ThenInclude(p => p.TipoProducto)
-                .ThenInclude(o => o.Productos)
-                .ThenInclude(p => p.ImageProductos)
-                .FirstOrDefaultAsync(c => c.Id == id);
-            if (cliente == null)
+            var tipoProducto = await _context.TipoProductos
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (tipoProducto == null)
             {
                 return NotFound();
             }
 
-            return View(cliente);
+            return View(tipoProducto);
         }
 
-        // GET: Clientes/Create
+        // GET: TipoProductos/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Clientes/Create
+        // POST: TipoProductos/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id")] Cliente cliente)
+        public async Task<IActionResult> Create([Bind("Id,Nombre")] TipoProducto tipoProducto)
         {
             if (ModelState.IsValid)
             {
-                _datacontext.Add(cliente);
-                await _datacontext.SaveChangesAsync();
+                _context.Add(tipoProducto);
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(cliente);
+            return View(tipoProducto);
         }
 
-        // GET: Clientes/Edit/5
+        // GET: TipoProductos/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -84,22 +73,22 @@ namespace Ghostly.Web.Controllers
                 return NotFound();
             }
 
-            var cliente = await _datacontext.Clientes.FindAsync(id);
-            if (cliente == null)
+            var tipoProducto = await _context.TipoProductos.FindAsync(id);
+            if (tipoProducto == null)
             {
                 return NotFound();
             }
-            return View(cliente);
+            return View(tipoProducto);
         }
 
-        // POST: Clientes/Edit/5
+        // POST: TipoProductos/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id")] Cliente cliente)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre")] TipoProducto tipoProducto)
         {
-            if (id != cliente.Id)
+            if (id != tipoProducto.Id)
             {
                 return NotFound();
             }
@@ -108,12 +97,12 @@ namespace Ghostly.Web.Controllers
             {
                 try
                 {
-                    _datacontext.Update(cliente);
-                    await _datacontext.SaveChangesAsync();
+                    _context.Update(tipoProducto);
+                    await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ClienteExists(cliente.Id))
+                    if (!TipoProductoExists(tipoProducto.Id))
                     {
                         return NotFound();
                     }
@@ -124,10 +113,10 @@ namespace Ghostly.Web.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(cliente);
+            return View(tipoProducto);
         }
 
-        // GET: Clientes/Delete/5
+        // GET: TipoProductos/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -135,30 +124,30 @@ namespace Ghostly.Web.Controllers
                 return NotFound();
             }
 
-            var cliente = await _datacontext.Clientes
+            var tipoProducto = await _context.TipoProductos
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (cliente == null)
+            if (tipoProducto == null)
             {
                 return NotFound();
             }
 
-            return View(cliente);
+            return View(tipoProducto);
         }
 
-        // POST: Clientes/Delete/5
+        // POST: TipoProductos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var cliente = await _datacontext.Clientes.FindAsync(id);
-            _datacontext.Clientes.Remove(cliente);
-            await _datacontext.SaveChangesAsync();
+            var tipoProducto = await _context.TipoProductos.FindAsync(id);
+            _context.TipoProductos.Remove(tipoProducto);
+            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ClienteExists(int id)
+        private bool TipoProductoExists(int id)
         {
-            return _datacontext.Clientes.Any(e => e.Id == id);
+            return _context.TipoProductos.Any(e => e.Id == id);
         }
     }
 }
